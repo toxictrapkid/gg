@@ -1,0 +1,147 @@
+// This script will scan bank statements, categorize income and spending, and do accounting to create a financial report.
+
+// First, we'll define an array of categories for income and spending.
+let categories = ["Rent/Mortgage", "Utilities", "Groceries", "Transportation", "Entertainment", "Insurance", "Savings", "Loans/Debts", "Gifts", "Other"];
+
+// Then, we'll define a function that will scan the bank statement.
+function scanStatement(statement) {
+  // This function will take in the bank statement as an argument.
+  // We'll use a loop to iterate through the statement and categorize each transaction.
+  for (let i = 0; i < statement.length; i++) {
+    let transaction = statement[i];
+    // For each transaction, we'll search through the categories array to see if it matches any of the categories.
+    for (let j = 0; j < categories.length; j++) {
+      let category = categories[j];
+      // If the transaction matches a category, we'll save it in a new object.
+      if (transaction.category === category) {
+        let newTransaction = {
+          category: category,
+          amount: transaction.amount
+        }
+        // We'll then add the new object to an array of categorized transactions.
+        let categorizedTransactions = [];
+        categorizedTransactions.push(newTransaction);
+      }
+    }
+  }
+  // After the loop has finished, we'll return the array of categorized transactions.
+  return categorizedTransactions;
+}
+
+// Finally, we'll define a function that will do the accounting and generate the financial report.
+function generateReport(transactions) {
+  // This function will take in the categorized transactions as an argument.
+  // We'll use a loop to iterate through the transactions and calculate the total income and spending for each category.
+  let totalIncome = 0;
+  let totalSp
+  for (let i = 0; i < transactions.length; i++) {
+    let transaction = transactions[i];
+    // If the transaction is income, we'll add it to the total income.
+    if (transaction.category === "Rent/Mortgage" || transaction.category === "Utilities" || transaction.category === "Groceries" || transaction.category === "Transportation" || transaction.category === "Entertainment" || transaction.category === "Insurance" || transaction.category === "Savings" || transaction.category === "Loans/Debts" || transaction.category === "Gifts" || transaction.category === "Other") {
+      totalIncome += transaction.amount;
+    }
+    // If the transaction is spending, we'll add it to the total spending.
+    else {
+      totalSpending += transaction.amount;
+    }
+  }
+  // After the loop has finished, we'll calculate the net income.
+  let netIncome = totalIncome - totalSpending;
+  // Then, we'll create a new object with the total income, total spending, and net income.
+  let report = {
+    totalIncome: totalIncome,
+    totalSpending: totalSpending,
+    netIncome: netIncome
+  }
+  // Finally, we'll return the report object.
+  return report;
+}
+
+// Now, we'll call the functions.
+let statement = [
+  {
+    category: "Rent/Mortgage",
+    amount: 1000
+  },
+  {
+    category: "Utilities",
+    amount: 100
+  },
+  {
+    category: "Groceries",
+    amount: 200
+  },
+  {
+    category: "Transportation",
+    amount: 50
+  },
+  {
+    category: "Entertainment",
+    amount: 50
+  },
+  {
+    category: "Insurance",
+    amount: 100
+  },
+  {
+    category: "Savings",
+    amount: 100
+  },
+  {
+    category: "Loans/Debts",
+    amount: 100
+  },
+  {
+    category: "Gifts",
+    amount: 100
+  },
+  {
+    category: "Other",
+    amount: 100
+  },
+  {
+    category: "Rent/Mortgage",
+    amount: 1000
+  },
+  {
+    category: "Utilities",
+    amount: 100
+  },
+  {
+    category: "Groceries",
+    amount: 200
+  },
+  {
+    category: "Transportation",
+    amount: 50
+  },
+  {
+    category: "Entertainment",
+    amount: 50
+  },
+  {
+    category: "Insurance",
+    amount: 100
+  },
+  {
+    category: "Savings",
+    amount: 100
+  },
+  {
+    category: "Loans/Debts",
+    amount: 100
+  },
+  {
+    category: "Gifts",
+    amount: 100
+  },
+  {
+    category: "Other",
+    amount: 100
+  }
+];
+
+let categorizedTransactions = scanStatement(statement);
+let report = generateReport(categorizedTransactions);
+
+console.log(report);
